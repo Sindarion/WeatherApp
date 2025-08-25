@@ -16,8 +16,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
+app.UseDefaultFiles();   // serves index.html
+app.UseStaticFiles();    // serves Angular assets
+
 app.UseAuthorization();
 
 app.MapControllers();
+
+// fallback all other routes to index.html (Angular router support)
+app.MapFallbackToFile("index.html");
 
 app.Run();

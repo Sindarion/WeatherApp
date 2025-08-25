@@ -1,19 +1,23 @@
-# ---- Build Angular ----
-FROM node:20 AS build-ui
-WORKDIR /src/ui
-COPY ui/ .
-RUN npm install && npm run build --prod
+# Build Angular
+FROM node:20 AS ui-build
+WORKDIR /ui
+COPY ui/package*.json ./
+RUN npm install
+COPY ui/ ./
+RUN npm run build --prod
 
-# ---- Build API ----
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-api
+# Build ASP.NET Core
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+COPY api/*.csproj ./api/
+RUN dotnet restore ./api/api.csproj
+COPY api/ ./api/
 WORKDIR /src/api
-COPY api/ .
-RUN dotnet publish -c Release -o /out
+RUN dotnet publish -c Release -o /app/publish
 
-# ---- Final Runtime ----
-FROM mcr.microsoft.com/dotnet/aspnet:8.0
+# Final runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
-COPY --from=build-api /out .
-COPY --from=build-ui /src/ui/dist/ui /app/wwwroot
-EXPOSE 5000
-ENTRYPOINT ["dotnet", "Api.dll"]
+COPY --from=build /app/publish ./
+COPY --from=ui-build /ui/dist/ui/browser ./wwwroot
+ENTRYPOINT ["dotnet", "api.dll"]

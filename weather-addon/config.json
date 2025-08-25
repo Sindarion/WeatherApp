@@ -1,0 +1,13 @@
+{
+  "name": "Angular + ASP.NET Core Add-on",
+  "version": "1.0.0",
+  "slug": "angular_dotnet_addon",
+  "description": "Angular frontend with ASP.NET Core API",
+  "startup": "services",
+  "boot": "auto",
+  "ports": {
+    "5000/tcp": 5000
+  },
+  "ingress": true,
+  "ingress_port": 5000
+}

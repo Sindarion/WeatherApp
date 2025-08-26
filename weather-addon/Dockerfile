@@ -4,7 +4,9 @@ WORKDIR /ui
 COPY ui/package*.json ./
 RUN npm install
 COPY ui/ ./
-RUN npm run build --prod
+# RUN npm run build --prod
+RUN npm run build -- --configuration production --base-href ./
+
 
 # Build ASP.NET Core
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build

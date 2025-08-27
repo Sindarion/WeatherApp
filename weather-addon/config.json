@@ -1,6 +1,6 @@
 {
   "name": "Angular + ASP.NET Core Add-on",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "slug": "angular_dotnet_addon",
   "description": "Angular frontend with ASP.NET Core API",
   "startup": "services",

@@ -1,9 +1,15 @@
-#!/bin/sh
+#!/bin/bash
 set -e
 
-# Default values if not passed
-IP=${ADDON_IP:-0.0.0.0}
-PORT=${ADDON_PORT:-5000}
+# Default values
+PORT=5000
+IP=0.0.0.0
 
-echo "Starting API on http://$IP:$PORT ..."
-exec dotnet api.dll --urls "http://$IP:$PORT"
+# Read HA options.json if available
+if [ -f /data/options.json ]; then
+  PORT=$(jq -r '.port // "5000"' /data/options.json)
+  IP=$(jq -r '.ip // "0.0.0.0"' /data/options.json)
+fi
+
+echo "Starting API on http://$IP:$PORT"
+/usr/bin/dotnet api.dll --urls "http://$IP:$PORT"

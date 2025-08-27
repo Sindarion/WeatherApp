@@ -1,0 +1,9 @@
+<p>weather works!</p>
+
+<button (click)="fetchForecast()">Fetch Weather Forecast</button>
+
+@for (item of forecastList; track $index) {
+    <div>
+        <p>{{item.date}} - {{item.temperatureC}}°C - {{item.temperatureF}}°F - {{item.summary}}</p>
+    </div>
+}

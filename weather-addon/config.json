@@ -1,6 +1,6 @@
 {
   "name": "Angular + ASP.NET Core Add-on",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "slug": "angular_dotnet_addon",
   "description": "Angular frontend with ASP.NET Core API",
   "startup": "services",
@@ -13,13 +13,5 @@
     "5000/tcp": null
   },
   "ingress": true,
-  "ingress_port": 5000,
-  "options": {
-    "listen_ip": "0.0.0.0",
-    "listen_port": 5000
-  },
-  "schema": {
-    "listen_ip": "str",
-    "listen_port": "int"
-  }
+  "ingress_port": 5000
 }

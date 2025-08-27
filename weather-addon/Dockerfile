@@ -22,4 +22,9 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
 COPY --from=build /app/publish ./
 COPY --from=ui-build /ui/dist/ui/browser ./wwwroot
-ENTRYPOINT ["dotnet", "api.dll"]
+# ENTRYPOINT ["dotnet", "api.dll"]
+
+COPY run.sh .
+RUN chmod +x run.sh
+
+ENTRYPOINT ["./run.sh"]

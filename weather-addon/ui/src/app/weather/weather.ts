@@ -12,7 +12,7 @@ export class Weather {
   forecastList: WeatherForecast[] = [];
 
   public fetchForecast() {
-    fetch('http://100.80.92.35:5000/api/WeatherForecast')
+    fetch('/api/WeatherForecast')
       .then(response => response.json())
       .then(data => {
         this.forecastList = data;

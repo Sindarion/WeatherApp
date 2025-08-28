@@ -12,7 +12,9 @@ export class Weather {
   forecastList: WeatherForecast[] = [];
 
   public fetchForecast() {
-    fetch('/api/WeatherForecast')
+    const basePath = window.location.pathname;
+
+    fetch(`${basePath}api/WeatherForecast`)
       .then(response => response.json())
       .then(data => {
         this.forecastList = data;
